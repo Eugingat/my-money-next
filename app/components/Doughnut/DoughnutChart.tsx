@@ -10,13 +10,19 @@ interface IDatasets {
     hoverOffset: number;
 }
 
-export default function DoughnutChart() {
+type Props = {
+    values: number[];
+    colors: string[];
+    names: string[];
+}
 
-    const [labels, setLabels] = useState<string[]>([])
+export default function DoughnutChart({values = [], colors = [], names = []}: Props) {
+
+    const [labels, setLabels] = useState<string[]>(names)
     // @ts-ignore
     const [datasets, setDatasets] = useState<IDatasets[]>([{
-        data: [],
-        backgroundColor: [],
+        data: values,
+        backgroundColor: colors,
         hoverOffset: 4}
     ])
 

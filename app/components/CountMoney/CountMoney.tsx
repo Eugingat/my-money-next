@@ -1,8 +1,14 @@
-export default function CountMoney() {
+type PropsType = {
+    count: number;
+}
+
+export default function CountMoney({count}: PropsType) {
     return (
         <section>
             <button> - </button>
-            Count!!!
+            <p>
+                {count}
+            </p>
             <button> + </button>
         </section>
     )
