@@ -1,8 +1,9 @@
-import DoughnutChart from "@/app/components/Doughnut/DoughnutChart";
+import DoughnutChart from "@/app/components/DoughnutChart/DoughnutChart";
 import CountMoney from "@/app/components/CountMoney/CountMoney";
 
 type PropsType = {
     categories: {
+        id: number;
         name: string;
         icon?: string;
         color: string;

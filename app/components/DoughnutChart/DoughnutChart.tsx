@@ -17,7 +17,6 @@ type Props = {
 }
 
 export default function DoughnutChart({values = [], colors = [], names = []}: Props) {
-
     const [labels, setLabels] = useState<string[]>(names)
     // @ts-ignore
     const [datasets, setDatasets] = useState<IDatasets[]>([{

@@ -13,12 +13,25 @@ const testData = [
     {
         id: 1,
         name: 'Vasya',
-        categories: [{
+        categories: [
+            {
+            id: 1,
             name: 'Food',
+            icon: 'food',
             color: '#96d35f',
             value: 100
-        }],
+            },
+            {
+                id: 2,
+                name: 'Gym',
+                icon: 'gym',
+                color: '#7b219f',
+                value: 100
+            },
+
+        ],
         replenishmentCategories: [{
+            id: 1,
             name: 'Salary',
             value: 250
         }],
