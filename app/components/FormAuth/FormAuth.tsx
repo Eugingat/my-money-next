@@ -2,10 +2,24 @@
 
 import {useFormState} from 'react-dom';
 import SubmitButton from "@/app/components/SubmitButton/SubmitButton";
-import action from "@/app/components/FormAuth/actions/form-action";
+import action from "@/app/components/FormAuth/action/form-action";
+import ButtonRegister from "@/app/components/ButtonRegister/ButtonRegister";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useEffect} from "react";
+import {toast} from "sonner";
 
 export default function FormAuth() {
-    const [state, formAction] = useFormState(action, { login: null, password: null })
+    const [state, formAction] = useFormState(action, { login: null, password: null });
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (searchParams.get('register')) {
+            toast.success('Event has been created');
+            router.replace('/');
+        }
+    }, [searchParams]);
+
     return (
         <form className='flex flex-col gap-6 border-solid border-2 border-blue-500 p-8 mt-12 w-120 self-center shadow-xl shadow-indigo-500/50' action={formAction}>
             <div>
@@ -15,9 +29,15 @@ export default function FormAuth() {
                 <div className='border-solid border-2 border-t-0 border-slate-500 rounded-b-2xl'>
                     <input className='w-full border-0 border-solid rounded-b-xl p-2 bg-slate-200 placeholder:text-slate-600 focus:ring focus:ring-inset focus:ring-indigo-600' type='password' autoComplete='password' id='password' name='password' placeholder='Password' required/>
                 </div>
-                <p> {state?.error}</p>
+                <p className='text-red-500 text-sm h-5'> {state?.error}</p>
             </div>
-            <SubmitButton />
+            <SubmitButton text='Sign in' />
+
+            <fieldset className='border-t-2 border-solid border-blue-500'>
+                <legend className='text-xl text-center px-4 dark:text-white'> or </legend>
+            </fieldset>
+
+            <ButtonRegister />
         </form>
     )
 }

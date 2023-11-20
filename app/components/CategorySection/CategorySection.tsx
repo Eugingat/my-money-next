@@ -23,12 +23,26 @@ export default function CategorySection({categories}: Props) {
 
     useEffect(() => {
         setFilteredCategories([...categories])
-    }, []);
+    }, [categories]);
 
-    const deleteCategoryHander = (id: number) => {
+    const deleteCategory = (id: number) => {
         // тут должен быть запрос на апи для удаления из бд
 
         setFilteredCategories([...categories.filter(({id: currentId}) => currentId !== id )])
+    };
+
+    const changeColorCategory = (e: ChangeEvent<HTMLInputElement>, id: number) => {
+        // тут запрос на сервер по обновлению цвета
+        // есть идея по поводу вызова обновления кэша запрос на категории но думаю плохая идея
+        const index = filteredCategories.findIndex(({id: currentId}) => currentId === id);
+        const category = filteredCategories.find(({id: currentId}) => currentId === id);
+
+        if (category) {
+            category.color = e.target.value;
+
+            setFilteredCategories([...filteredCategories.with(index, category)])
+        }
+
     }
 
 
@@ -39,7 +53,7 @@ export default function CategorySection({categories}: Props) {
                 <button title='Add category'> <AiOutlinePlusCircle title='Add category' size={24} /> </button>
             </div>
             {filteredCategories.map(({id,name, color, icon}) => {
-                return <Category key={id} id={id} color={color} name={name} icon={icon} deleteCategoryHander={deleteCategoryHander}/>
+                return <Category key={id} id={id} color={color} name={name} icon={icon} deleteCategory={deleteCategory} changeColorCategory={changeColorCategory}/>
             })}
         </section>
     )

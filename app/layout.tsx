@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+import { I18nProviderClient } from '@/locales/client'
 import type { Metadata } from 'next'
 import './global.css'
 
@@ -7,14 +9,14 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode,
 }) {
   return (
     <html lang="en">
       <body className='bg-slate-200 dark:bg-slate-900'>
-      {children}
+        {children}
       </body>
     </html>
   )
