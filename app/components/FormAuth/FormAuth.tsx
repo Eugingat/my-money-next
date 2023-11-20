@@ -4,21 +4,13 @@ import {useFormState} from 'react-dom';
 import SubmitButton from "@/app/components/SubmitButton/SubmitButton";
 import action from "@/app/components/FormAuth/action/form-action";
 import ButtonRegister from "@/app/components/ButtonRegister/ButtonRegister";
-import {useRouter, useSearchParams} from "next/navigation";
-import {useEffect} from "react";
-import {toast} from "sonner";
+import {useNotification} from "@/app/hooks/useNotification";
+import {MainPageNotication} from "@/app/constants/listNotifications";
 
 export default function FormAuth() {
     const [state, formAction] = useFormState(action, { login: null, password: null });
-    const searchParams = useSearchParams();
-    const router = useRouter();
 
-    useEffect(() => {
-        if (searchParams.get('register')) {
-            toast.success('Event has been created');
-            router.replace('/');
-        }
-    }, [searchParams]);
+    useNotification(MainPageNotication);
 
     return (
         <form className='flex flex-col gap-6 border-solid border-2 border-blue-500 p-8 mt-12 w-120 self-center shadow-xl shadow-indigo-500/50' action={formAction}>

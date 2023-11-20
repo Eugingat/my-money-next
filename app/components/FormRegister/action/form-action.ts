@@ -32,12 +32,12 @@ export default async function formAction(prevState: any, formData: FormData){
             throw new Error('Busy: Sorry, this login is busy');
         }
 
-        revalidatePath('/registerregister');
+        revalidatePath('/register');
     } catch(error: any) {
         return {
             error: error.message,
         }
     }
 
-    redirect('/?reg=true', RedirectType.push);
+    redirect('/?register=true', RedirectType.push);
 }
