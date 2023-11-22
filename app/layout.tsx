@@ -1,7 +1,6 @@
-import { ReactElement } from 'react'
-import { I18nProviderClient } from '@/locales/client'
 import type { Metadata } from 'next'
 import './global.css'
+import ThemeProvider from "@/app/components/ThemeProvider/ThemeProvider";
 
 export const metadata: Metadata = {
   title: 'My money',
@@ -16,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className='bg-slate-200 dark:bg-slate-900'>
-        {children}
+        <ThemeProvider>
+            {children}
+        </ThemeProvider>
       </body>
     </html>
   )

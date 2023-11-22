@@ -1,5 +1,6 @@
 import {ReactNode} from "react";
 import Link from "next/link";
+import Header from "@/app/components/Header/Header";
 
 export default function LayoutChild(
     {
@@ -11,11 +12,7 @@ export default function LayoutChild(
     }) {
     return (
         <>
-            {params?.id && <header className='py-4 bg-indigo-600 text-white'>
-                <div>
-                    <Link href='/'> Home </Link>
-                </div>
-            </header>}
+            {params?.id && <Header />}
             <div>
                 {children}
             </div>

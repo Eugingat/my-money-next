@@ -1,18 +1,8 @@
 import FormAuth from "@/app/components/FormAuth/FormAuth";
 import Welcome from "@/app/components/Welcome/Welcome";
-import clientPromise from "@/app/lib/mongodb";
 import {Toaster} from "sonner";
 
-const getTest = async () => {
-    const client = await clientPromise
-
-
-
-}
-
 export default async function Home() {
-  // await getTest();
-
   return (
       <>
           <Toaster richColors position="top-center" expand={false}/>

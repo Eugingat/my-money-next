@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import clientPromise from "@/app/lib/mongodb";
 import {registerTS} from "sucrase/dist/types/register";
 import {ObjectId} from "mongodb";
+import {createToken} from "@/app/utils/token";
 
 interface IUser {
     login: string;
@@ -33,7 +34,7 @@ export const sigIn = async (user: Omit<IUser, 'name'>) => {
         }
     }
 
-    const token = jwt.sign({name: dbUser.name, id: dbUser._id }, process.env.SECRET_KEY!, { expiresIn: '24h'})
+    const token = createToken({name: dbUser.name, id: dbUser._id });
 
     await collection.updateOne({ _id: dbUser._id}, { $set: { token }});
 
@@ -49,22 +50,31 @@ export const logout = async () => {
 };
 
 export const register = async (user: IUser): Promise<boolean> => {
+    console.log(1111111);
     const client = await clientPromise;
     const db = client.db('my-money');
 
-    const collection = db.collection('users');
+    const collectionCategories = db.collection('categories');
+    console.log(collectionCategories);
+    const collectionUsers = db.collection('users');
+    console.log(collectionUsers);
 
-    const isUser = await collection.findOne({ login: user.login });
+    const isUser = await collectionUsers.findOne({ login: user.login });
+
+    console.log(2222222);
+    console.log(isUser);
 
     if (isUser) {
         return false;
     }
 
-    console.log(isUser);
+    const category = await collectionCategories.insertOne({
+        mainCategories: [],
+        replenishmentCategories: [],
+        transactions: []
+    });
 
-    // const token = jwt.sign(user, process.env.SECRET_KEY || '123456', { expiresIn: '24h'})
-
-    await collection.insertOne(user);
+    await collectionUsers.insertOne({ ...user, category: category.insertedId });
 
     return true;
 };

@@ -25,7 +25,7 @@ export default function FormAuth() {
             </div>
             <SubmitButton text='Sign in' />
 
-            <fieldset className='border-t-2 border-solid border-blue-500'>
+            <fieldset className='border-t-2 border-solid border-blue-500 h-7'>
                 <legend className='text-xl text-center px-4 dark:text-white'> or </legend>
             </fieldset>
 
