@@ -27,5 +27,12 @@ export const MainPageNotication :IListNotifications[] = [
         keyText: 'non-login',
         isRouter: true,
         to: '/'
+    },
+    {
+        query: 'logout',
+        status: 'success',
+        keyText: 'logout',
+        isRouter: true,
+        to: '/'
     }
 ]

@@ -1,9 +1,8 @@
-import {NextRequest, NextResponse} from "next/server";
+import {cookies} from "next/headers";
+export async function PUT() {
+    cookies().delete('token');
 
-export async function GET() {}
-
-export async function POST(request: NextRequest, response: NextResponse) {
-    console.log(request.body);
+    return new Response('Success', {
+        status: 201
+    });
 }
-
-export async function PUT() {}
